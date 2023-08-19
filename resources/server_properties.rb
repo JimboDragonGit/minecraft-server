@@ -63,7 +63,7 @@ end
 action :update do
   unless ::File.exist?("#{new_resource.path}/#{new_resource.name}")
     log 'not a valid server' do
-      message 'That server does not exist!'
+      message "That server does not exist at #{new_resource.path}/#{new_resource.name}!"
       level :error
     end
     exit 1

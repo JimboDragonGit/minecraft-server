@@ -257,7 +257,7 @@ action :create do
         mode '0755'
         not_if { ::File.exist?("/etc/init.d/minecraft_#{new_resource.service_name}") }
       end
-    elsif node['platform_version'].slice(0, 2).eql? '16'
+    elsif node['platform_version'].slice(0, 2) > '16'
       template "/etc/systemd/system/minecraft_#{new_resource.service_name}.service" do
         source 'minecraft.service.erb'
         cookbook 'minecraft-server'
@@ -348,7 +348,7 @@ action :update do
         )
         mode '0755'
       end
-    elsif node['platform_version'].slice(0, 2).eql? '16'
+    elsif node['platform_version'].slice(0, 2) > '16'
       template "/etc/systemd/system/minecraft_#{new_resource.service_name}.service" do
         source 'minecraft.service.erb'
         cookbook 'minecraft-server'
@@ -412,7 +412,7 @@ action :delete do
         action :delete
         only_if { ::File.exist?("/etc/init.d/minecraft_#{new_resource.service_name}") }
       end
-    elsif node['platform_version'].slice(0, 2).eql? '16'
+    elsif node['platform_version'].slice(0, 2) > '16'
       template "/etc/systemd/system/minecraft_#{new_resource.service_name}.service" do
         source 'minecraft.service.erb'
         cookbook 'minecraft-server'

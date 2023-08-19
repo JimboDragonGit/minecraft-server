@@ -105,7 +105,7 @@ action :create do
     comment 'The default user for running Minecraft servers'
     manage_home false
     password '$1$fJ1ih5nr$gvyz.EjtpQnITcUddzM9k1'
-    action node['etc']['passwd']['chefminecraft'] != nil || new_resource.owner != 'chefminecraft' ? :nothing : :create
+    action new_resource.owner != 'chefminecraft' ? :nothing : :create
   end
 
   currentVersion = new_resource.version.eql?('latest') ? get_latest_version(new_resource.snapshot) : new_resource.version
